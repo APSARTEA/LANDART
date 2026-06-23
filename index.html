@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lupo del Vulture</title>
+
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image.prod.js"></script>
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+<style>
+
+html,body{
+margin:0;
+overflow:hidden;
+font-family:Arial;
+}
+
+#popup{
+position:fixed;
+left:50%;
+bottom:40px;
+transform:translateX(-50%);
+display:none;
+z-index:9999;
+}
+
+#popup button{
+
+font-size:24px;
+padding:18px 35px;
+background:#ff9900;
+color:white;
+border:none;
+border-radius:12px;
+cursor:pointer;
+box-shadow:0 0 15px rgba(0,0,0,.4);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="popup">
+
+<button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSezfYwqKa7hiqKAHq-V2Xxg3r3-7Q4gpggQthyXc1QwwkIglA/viewform'">
+
+🐺 HAI TROVATO IL LUPO!
+<br><br>
+🎁 PARTECIPA AL CONTEST
+
+</button>
+
+</div>
+
+<a-scene
+mindar-image="imageTargetSrc: ./targets/lupo.mind;"
+embedded
+color-space="sRGB"
+renderer="colorManagement:true; physicallyCorrectLights:true"
+vr-mode-ui="enabled:false"
+device-orientation-permission-ui="enabled:true">
+
+<a-assets></a-assets>
+
+<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+
+<a-entity id="target" mindar-image-target="targetIndex:0"></a-entity>
+
+</a-scene>
+
+<script>
+
+const target=document.querySelector("#target");
+const popup=document.querySelector("#popup");
+
+target.addEventListener("targetFound",()=>{
+
+popup.style.display="block";
+
+});
+
+target.addEventListener("targetLost",()=>{
+
+popup.style.display="none";
+
+});
+
+</script>
+
+</body>
+</html>
